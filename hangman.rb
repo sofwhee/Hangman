@@ -79,19 +79,15 @@ stickman = stickman_0
 win = false
 p secret_word
 
-while stickman != stickman_6
+while stickman != stickman_6 && !win
   puts stickman
   p word_in_progress
   puts guessed_letters
 
   guess = gets.chomp
 
-	# guess word => win!
-  if guess == secret_word
-    win = true
-    break
 	# already guessed this letter!
-	elsif guessed_letters.include?(guess)
+	if guessed_letters.include?(guess)
     puts "You already tried the letter #{guess}. Try a different one."
 	# guess a letter? => add 
   elsif secret_word.include?(guess)
@@ -104,7 +100,12 @@ while stickman != stickman_6
   end
 
   guessed_letters.push(guess) if !guessed_letters.include?(guess)
+
+  if word_in_progress.join == secret_word
+    win = true
+  end
+
 end
 
 puts stickman
-puts win
+puts "you win!"
