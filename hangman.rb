@@ -76,6 +76,8 @@ stickmen = [stickman_0, stickman_1, stickman_2, stickman_3, stickman_4, stickman
 
 stickman = stickman_0
 
+valid_chars = %w{a b c d e f g h i j k l m n o p q r s t u v w x y z}
+
 win = false
 p secret_word
 
@@ -84,7 +86,13 @@ while stickman != stickman_6 && !win
   p word_in_progress
   puts guessed_letters
 
-  guess = gets.chomp
+  loop do 
+    guess = gets.chomp.downcase
+    if valid_chars.include?(guess)
+      break
+    end
+    puts "\"#{guess}\" is an invalid letter. Please try again."
+  end
 
 	# already guessed this letter!
 	if guessed_letters.include?(guess)
